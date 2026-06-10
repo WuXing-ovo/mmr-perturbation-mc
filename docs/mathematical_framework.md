@@ -1,3 +1,11 @@
+# A mathematical framework for MMR system analysis
+
+*This document serves as a continuous development log rather than a finalized academic report.*
+
+## Status
+
+Figuring out suitable variables to measure the matchmaking system as a signle metric (like MSE) can not fully capture it.
+
 ## Players
 
 ### Definition of Players
