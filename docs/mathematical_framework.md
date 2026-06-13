@@ -60,6 +60,8 @@ $$
 
 The input matchmaking pool is a vector contains the current visible rating of $N$ players. Then sort elements in descending or ascending based strictly on their visible rating and create matches by pairing strictly adjacent elements. It will generate a $2 \times \frac{N}{2}$ matrix.
 
+However, the result from adjacent matching failed to converge. It seems that the pairings remain unchanged during the simulation. In contrast, random-matching converges very fast, although it's not acceptable for real games. For the sake of prototyping, the 1v1 Elo matchmaking system will use random-matching algorithm.
+
 ### 5v5 TrueSkill 2
 
 Work In Progress.
