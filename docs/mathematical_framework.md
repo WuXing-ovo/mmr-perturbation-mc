@@ -1,10 +1,14 @@
+---
+bibliography: Matchmaking_Systems.bib
+---
+
 # A mathematical framework for MMR system analysis
 
 *This document serves as a continuous development log rather than a finalized academic report.*
 
 ## Status
 
-Figuring out suitable variables to measure the matchmaking system as a signle metric (like MSE) can not fully capture it.
+Figuring out suitable variables to measure the matchmaking system as a single metric (like MSE) can not fully capture it.
 
 ## Players
 
@@ -32,14 +36,7 @@ $$
 V_{i}=H_{i}
 $$
 
-For anomalous players ($S_{a}$), the relation between $V$ and $H$ is explicitly broken. To simulate Smurfs and Boosted Accounts, set $H$ and $V$ with different $\mu$ is an easy way to initialize. Calculating the initial MSE with $MSE=\frac{1}{N\alpha}\sum\limits_{i\in S_{a}}(V_{i}-H_{i})^{2}$ is a good way to quantify the initial deviation. The choice of $\mu$ determines the initial deviation of the system.
-To study the deviation of the overall MSE, we calculate it across all players, the parameter $t$ here is the number of steps.
-
-$$
-MSE(t)=\frac{1}{N}\sum\limits_{i=1}^{N}(V_{i}(t)-H_{i})^{2}
-$$
-
-If $\Delta \mu$ keeps same between two kinds of anomalous players (with deterministic offset), the initial MSE is equal to $\Delta \mu^{2}\cdot\alpha$.
+For anomalous players ($S_{a}$), the relation between $V$ and $H$ is explicitly broken. To simulate Smurfs and Boosted Accounts, set $H$ and $V$ with different $\mu$ is an easy way to initialize.
 
 ## Win/Loss Estimator
 
@@ -90,3 +87,33 @@ Where $V_{A}(t)$ is the Visible MMR, $S_{A}$ is the result from Win/Loss Estimat
 ### 5v5 TrueSkill 2
 
 Work In Progress.
+
+## Assessments
+
+Evaluating a matchmaking system with a single metric (like MSE) is insufficient to fully reflect its stability and the player experience. For example, a pure random matching algorithm accelerates convergence, but it also causes a large proportion of unfair games, which negatively impacts players' game experience. Therefore, assessing the proportion of fair games it creates is vital to ensure a positive individual player experience.
+
+### MSE
+
+$$
+MSE=\frac{1}{N\alpha}\sum\limits_{i\in S_{a}}(V_{i}-H_{i})^{2}
+$$
+
+MSE can be used to monitor the convergence and compare different initial conditions. Time-dependent MSE reflects the evolution of a simulation.
+
+$$
+MSE(t)=\frac{1}{N}\sum\limits_{i=1}^{N}(V_{i}(t)-H_{i})^{2}
+$$
+
+### B-S Score
+
+Forecast performance was evaluated using the Brier Score (BS), originally proposed by [@brierVERIFICATIONFORECASTSEXPRESSED1950].
+
+$$
+BS = \frac{1}{N}\sum^{N}_{i=1}(f_{i}-o_{i})^{2}
+$$
+
+Where $f_{i}$ is the forecasted probability, and $o_{i}$ is the actual outcome.
+
+Comparing the BS score across iterations also reflects the evolution of the matchmaking system. Additionally a stable BS score also represents convergence.
+
+## References
